@@ -1,0 +1,20 @@
+$sidebar-size: 15rem;
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  height: 100vh;
+  max-height: 100vh;
+  width: $sidebar-size;
+  background-color: lightgray;
+  color: black;
+}
+
+.mainContent {
+  padding: 1rem;
+  width: calc(100vw - $sidebar-size);
+  max-width: calc(100vw - $sidebar-size);
+  height: 100vh;
+}
