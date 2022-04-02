@@ -1,32 +1,32 @@
-import { Pane } from "evergreen-ui";
+import { Table } from "evergreen-ui";
 import { NextPage } from "next";
 import { useMemo } from "react";
-
-interface Column {
-  Header: string;
-  accessor: string;
-}
+import mockTickets from "../../mock_data/tickets";
 
 const ListarTickets: NextPage = () => {
-  const data = useMemo(
-    () => [
-      { col1: "Hello", col2: "wolrd" },
-      { col1: "Hello", col2: "wolrd" },
-      { col1: "Hello", col2: "wolrd" },
-    ],
-    []
-  );
-
-  const colums = useMemo<Column[]>(
-    () => [
-      { Header: "coluna 1", accessor: "col1" },
-      { Header: "coluna 2", accessor: "col2" },
-    ],
-    []
-  );
+  const tickets = useMemo(() => mockTickets, []);
   return (
     <>
-      <Pane>a</Pane>
+      <Table>
+        <Table.Head>
+          <Table.TextHeaderCell>ID</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Título</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Criado em</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Ações</Table.TextHeaderCell>
+        </Table.Head>
+        <Table.Body height={240}>
+          {tickets.map((ticket) => (
+            <Table.Row key={ticket.id}>
+              <Table.TextCell>{ticket.displayId}</Table.TextCell>
+              <Table.TextCell>{ticket.title}</Table.TextCell>
+              <Table.TextCell>{ticket.createdAt}</Table.TextCell>
+              <Table.Cell>
+                <button>Visualizar</button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
     </>
   );
 };
